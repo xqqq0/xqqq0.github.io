@@ -93,7 +93,9 @@
 <meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_2.png">
 <meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_4.png">
 <meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_5.png">
-<meta property="og:updated_time" content="2016-06-06T08:43:57.000Z">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_6.png">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_7.png">
+<meta property="og:updated_time" content="2016-06-06T09:27:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Swift项目的MCVM结构">
 <meta name="twitter:description" content="简介第一次接触“正统”的swift项目，发现与之前的OC项目的结构有很大的改变，其中最大的的一点区别是在于在以前的MVC基础之上又独立出一层Manager,如题中所说的MVCM。对比以前的MVC架构，Manager层面主要抽离的是网络访问层面，即在Controller层不会再看早和网络请求数据详细相关的代码，但是会在controller增加一个Manager类型的属性，用以触发请求，以及数据的使用">
@@ -282,7 +284,7 @@
 <li>定义数据请求函数<br>参数：不做详述，根据具体需求填写<br>网络请求：<br>1.访问网络<br>2.网络访问成功对进行数据存储（存储到结构体）<br>3.回调:此层回调不是以前节结构中的数据网络访问成功时的回调，而是将Manager数据下载存储完毕后对外界的通知，通知控制器可以进行使用数据</li>
 <li>分页相关的代码（一句具体要需求增减)<br>不赘述</li>
 <li>数据存储容器声明及初始化<br>在swift的数据一般存储在结构体中，代替以前的模型类，一般通过json进行初始化，</li>
-<li>回调<br>闭包进行回调，作用参考2中解释typealias dataManagerCallback = (type: HSDataManagerCallType, msg: String, isRefresh: Bool) -&gt; Void<br>以下通过具体代码进行演示<br><br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_2.png" alt="img1"><br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_4.png" alt="img2"></li>
+<li>回调<br>闭包进行回调，作用参考2中解释typealias dataManagerCallback = (type: HSDataManagerCallType, msg: String, isRefresh: Bool) -&gt; Void<br>以下通过具体代码进行演示<br><br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_2.png" alt="img M1"><br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_4.png" alt="img M2"></li>
 </ol>
 </li>
 </ul>
@@ -290,15 +292,19 @@
 <li>代码结构<br>控制器中没有了网络访问相关的代码，取而代之的是要对Manager的声明以及初始化，以及通过Manager进行网络请求（在Manager中写好函数，controller中Manager调用函数来触发网络请求）以及在回调中对数据进行获取（如果是tableView 一般是进行刷新数据源操作）<ol>
 <li>懒加载Manager，初始化</li>
 <li>发起网络请求</li>
-<li>网络回调<br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_5.png" alt="img3"></li>
+<li>网络回调<br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_5.png" alt="img C"></li>
 </ol>
 </li>
 </ul>
 <h4 id="cell"><a href="#cell" class="headerlink" title="cell"></a>cell</h4><ul>
-<li>代码结构<br>关于cell的说一下几点<ol>
-<li>与tableView的分离<br>cell的创建依旧依赖于tableView，但是在cell的控件的赋值的过程移到cell内部，外部提供一个数据源的接口，在controller层面屏蔽cell内部细节</li>
-<li>tableView</li>
-<li>数据的分离</li>
+<li><p>代码结构<br>关于cell的说一下几点</p>
+<ol>
+<li>与tableView的分离<br>cell的创建依旧依赖于tableView，但是在cell的控件的赋值的过程移到cell内部，外部提供一个数据源的接口，在controller层面屏蔽cell内部细节，在cell中懒加载一个数据模型类型的属性，在其didSet进对组件进行复制<br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_6.png" alt="img Ce1"></li>
+<li><p>tableView 的行高的计算<br>在以前的计算行高，用frame 或者 自动布局和frame混合计算，前者对于动态的尺寸的计算，代码量比较大，适合纯代码的开发，后者比前者的优势在于很大部分的布局可以用自动布局实现，实现了大部分的自动化，但是对于行高计算cell行号，要综合计算所有组件的行高的综合，需要用frame进行计算。那么有没有一种可以用自动布局全部搞定的方法，彻底实现自动化。</p>
+<h5 id="systemLayoutSizeFittingSize"><a href="#systemLayoutSizeFittingSize" class="headerlink" title="systemLayoutSizeFittingSize"></a>systemLayoutSizeFittingSize</h5><p><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_7.png" alt="img Ce2"><br>简单的翻译下官方文档：<br>标题是自动布局中的测量</p>
+</li>
+<li><p>数据的分离</p>
+</li>
 </ol>
 </li>
 </ul>
@@ -432,7 +438,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码的结构及调用顺序分析"><span class="nav-number">2.</span> <span class="nav-text">代码的结构及调用顺序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Manager"><span class="nav-number">2.1.</span> <span class="nav-text">Manager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller"><span class="nav-number">2.2.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cell"><span class="nav-number">2.3.</span> <span class="nav-text">cell</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码的结构及调用顺序分析"><span class="nav-number">2.</span> <span class="nav-text">代码的结构及调用顺序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Manager"><span class="nav-number">2.1.</span> <span class="nav-text">Manager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller"><span class="nav-number">2.2.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cell"><span class="nav-number">2.3.</span> <span class="nav-text">cell</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#systemLayoutSizeFittingSize"><span class="nav-number">2.3.1.</span> <span class="nav-text">systemLayoutSizeFittingSize</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
