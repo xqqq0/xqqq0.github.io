@@ -95,7 +95,8 @@
 <meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_5.png">
 <meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_6.png">
 <meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_7.png">
-<meta property="og:updated_time" content="2016-06-06T09:27:37.000Z">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_1.png">
+<meta property="og:updated_time" content="2016-06-06T14:11:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Swift项目的MCVM结构">
 <meta name="twitter:description" content="简介第一次接触“正统”的swift项目，发现与之前的OC项目的结构有很大的改变，其中最大的的一点区别是在于在以前的MVC基础之上又独立出一层Manager,如题中所说的MVCM。对比以前的MVC架构，Manager层面主要抽离的是网络访问层面，即在Controller层不会再看早和网络请求数据详细相关的代码，但是会在controller增加一个Manager类型的属性，用以触发请求，以及数据的使用">
@@ -297,18 +298,14 @@
 </li>
 </ul>
 <h4 id="cell"><a href="#cell" class="headerlink" title="cell"></a>cell</h4><ul>
-<li><p>代码结构<br>关于cell的说一下几点</p>
-<ol>
+<li>代码结构<br>关于cell的说一下几点<ol>
 <li>与tableView的分离<br>cell的创建依旧依赖于tableView，但是在cell的控件的赋值的过程移到cell内部，外部提供一个数据源的接口，在controller层面屏蔽cell内部细节，在cell中懒加载一个数据模型类型的属性，在其didSet进对组件进行复制<br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_6.png" alt="img Ce1"></li>
-<li><p>tableView 的行高的计算<br>在以前的计算行高，用frame 或者 自动布局和frame混合计算，前者对于动态的尺寸的计算，代码量比较大，适合纯代码的开发，后者比前者的优势在于很大部分的布局可以用自动布局实现，实现了大部分的自动化，但是对于行高计算cell行号，要综合计算所有组件的行高的综合，需要用frame进行计算。那么有没有一种可以用自动布局全部搞定的方法，彻底实现自动化。</p>
-<h5 id="systemLayoutSizeFittingSize"><a href="#systemLayoutSizeFittingSize" class="headerlink" title="systemLayoutSizeFittingSize"></a>systemLayoutSizeFittingSize</h5><p><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_7.png" alt="img Ce2"><br>简单的翻译下官方文档：<br>标题是自动布局中的测量</p>
-</li>
-<li><p>数据的分离</p>
-</li>
+<li>tableView 的行高的计算<br>在以前的计算行高，用frame 或者 自动布局和frame混合计算，前者对于动态的尺寸的计算，代码量比较大，适合纯代码的开发，后者比前者的优势在于很大部分的布局可以用自动布局实现，实现了大部分的自动化，但是对于行高计算cell行号，要综合计算所有组件的行高的综合，需要用frame进行计算。那么有没有一种可以用自动布局全部搞定的方法，彻底实现自动化。<h5 id="systemLayoutSizeFittingSize"><a href="#systemLayoutSizeFittingSize" class="headerlink" title="systemLayoutSizeFittingSize"></a>systemLayoutSizeFittingSize</h5><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_7.png" alt="img Ce2"><br>简单的翻译下官方文档：<br>标题是自动布局中的测量<h6 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h6>指出满足约束的最大的或者最小的可能的值<h6 id="Fitting-Size"><a href="#Fitting-Size" class="headerlink" title="Fitting Size"></a>Fitting Size</h6>此值是以上函数的参数的取值，是个枚举量<br><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_1.png" alt="img Ce3"><br>UILayoutFittingCompressedSize<br>使用最小的值作为选项<br>UILayoutFittingExpandedSize<br>使用最小的值作为选项 </li>
 </ol>
 </li>
 </ul>
-
+<pre><code>3. 数据的分离
+</code></pre>
       
     </div>
 
@@ -438,7 +435,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码的结构及调用顺序分析"><span class="nav-number">2.</span> <span class="nav-text">代码的结构及调用顺序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Manager"><span class="nav-number">2.1.</span> <span class="nav-text">Manager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller"><span class="nav-number">2.2.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cell"><span class="nav-number">2.3.</span> <span class="nav-text">cell</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#systemLayoutSizeFittingSize"><span class="nav-number">2.3.1.</span> <span class="nav-text">systemLayoutSizeFittingSize</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码的结构及调用顺序分析"><span class="nav-number">2.</span> <span class="nav-text">代码的结构及调用顺序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Manager"><span class="nav-number">2.1.</span> <span class="nav-text">Manager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller"><span class="nav-number">2.2.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cell"><span class="nav-number">2.3.</span> <span class="nav-text">cell</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#systemLayoutSizeFittingSize"><span class="nav-number">2.3.1.</span> <span class="nav-text">systemLayoutSizeFittingSize</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Parameters"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Fitting-Size"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">Fitting Size</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
