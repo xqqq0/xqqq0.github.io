@@ -170,7 +170,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -180,7 +180,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -233,6 +233,108 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/15/技术小结/" itemprop="url">
+                  技术小结（1）：0615
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-06-15T14:30:17+08:00" content="2016-06-15">
+              2016-06-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="manager写法总结"><a href="#manager写法总结" class="headerlink" title="manager写法总结"></a>manager写法总结</h2><h5 id="按照数据的流向编号"><a href="#按照数据的流向编号" class="headerlink" title="按照数据的流向编号"></a>按照数据的流向编号</h5><p><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_2.png" alt=""></p>
+<h4 id="1-继承自网络访问工具类"><a href="#1-继承自网络访问工具类" class="headerlink" title="1.继承自网络访问工具类"></a>1.继承自网络访问工具类</h4><h4 id="2-分页属性"><a href="#2-分页属性" class="headerlink" title="2.分页属性"></a>2.分页属性</h4><p><img src="" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">【依据具体情况添加此项】</span><br><span class="line">总页数，当前页码索引，总条数</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-数据存储容器（一般是结构体数组）"><a href="#3-数据存储容器（一般是结构体数组）" class="headerlink" title="3.数据存储容器（一般是结构体数组）"></a>3.数据存储容器（一般是结构体数组）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关于结构体，是一个独立文件，根据后台返回的字段列表进行编码，用json 进行初始化</span><br></pre></td></tr></table></figure>
+<p><img src="http://o86uiyd40.bkt.clouddn.com/QQ20160615-0.png" alt=""></p>
+<h4 id="4-回调通知"><a href="#4-回调通知" class="headerlink" title="4.回调通知"></a>4.回调通知</h4><p><img src="" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通知控制器数据获取完毕，成功或者失败，一般采用闭包</span><br><span class="line">闭包书写比较麻烦，可以预先用typealias实现声明</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-网络访问方法（依据具体的场景增减函数）"><a href="#5-网络访问方法（依据具体的场景增减函数）" class="headerlink" title="5.网络访问方法（依据具体的场景增减函数）"></a>5.网络访问方法（依据具体的场景增减函数）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">调用网络工具类方法，具体看是否需要分页，数据成功取回以后，对数据存储对象进行元素填充，并通过闭包进行回调</span><br></pre></td></tr></table></figure>
+<h2 id="控制器之间引用"><a href="#控制器之间引用" class="headerlink" title="控制器之间引用"></a>控制器之间引用</h2><h6 id="在开发中经常会用到一个控制器去引用另外一个控制器的view，如下图，有个UIViewController作为一个大容器，在每次滑动的时候需要加载一个新的UITableViewController。需要注意的点，首先是将UITableViewController的tableView添加UIViewController的view。"><a href="#在开发中经常会用到一个控制器去引用另外一个控制器的view，如下图，有个UIViewController作为一个大容器，在每次滑动的时候需要加载一个新的UITableViewController。需要注意的点，首先是将UITableViewController的tableView添加UIViewController的view。" class="headerlink" title="在开发中经常会用到一个控制器去引用另外一个控制器的view，如下图，有个UIViewController作为一个大容器，在每次滑动的时候需要加载一个新的UITableViewController。需要注意的点，首先是将UITableViewController的tableView添加UIViewController的view。"></a>在开发中经常会用到一个控制器去引用另外一个控制器的view，如下图，有个<code>UIViewController</code>作为一个大容器，在每次滑动的时候需要加载一个新的<code>UITableViewController</code>。需要注意的点，首先是将<code>UITableViewController</code>的tableView添加<code>UIViewController</code>的view。</h6><p><img src="http://o86uiyd40.bkt.clouddn.com/11.gif" alt=""></p>
+<p><img src="" alt="">错误代码</p>
+<h6 id="后来发现数据不显示，只有一个空的tableView，说明UITableViewController已经有了tableView，后来代码进行了修改"><a href="#后来发现数据不显示，只有一个空的tableView，说明UITableViewController已经有了tableView，后来代码进行了修改" class="headerlink" title="后来发现数据不显示，只有一个空的tableView，说明UITableViewController已经有了tableView，后来代码进行了修改"></a>后来发现数据不显示，只有一个空的tableView，说明<code>UITableViewController</code>已经有了<code>tableView</code>，后来代码进行了修改</h6><p><img src="" alt="">正确代码</p>
+<h6 id="分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在"><a href="#分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在" class="headerlink" title="分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在"></a>分析：代码中的<code>vc</code>属于一个临时变量，在方法执行完以后就销毁，但是由于<code>addSubview</code>方法对<code>tableView</code>持有，所以并未释放掉，但<code>vc</code>已经销毁，数据不存在</h6><h2 id="关于UITableViewController-的tableView-与-UIViewController-的view"><a href="#关于UITableViewController-的tableView-与-UIViewController-的view" class="headerlink" title="关于UITableViewController 的tableView 与 UIViewController 的view"></a>关于UITableViewController 的tableView 与 UIViewController 的view</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/06/初识swift项目的mcvm结构/" itemprop="url">
                   初识Swift项目的MCVM结构
                 </a>
@@ -246,7 +348,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-06-06T08:25:00+08:00" content="2016-06-06">
               2016-06-06
             </time>
@@ -380,7 +482,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-30T09:15:22+08:00" content="2016-05-30">
               2016-05-30
             </time>
@@ -489,8 +591,8 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
@@ -537,7 +639,7 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
