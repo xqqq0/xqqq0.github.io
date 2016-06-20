@@ -233,8 +233,102 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/15/技术小结/" itemprop="url">
-                  技术小结（1）：0615
+                <a class="post-title-link" href="/2016/06/20/关于cell重用的小计/" itemprop="url">
+                  关于cell重用的小计
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-20T11:40:07+08:00" content="2016-06-20">
+              2016-06-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h4 id="对于tableView-的cell的重复用代码看似已经很熟悉，但是在上周五和请教池神的时候发下由于比较粗心已经一些习惯性的写法，不走心的写法，以至于发现以前代码中好多的错误，今写此博客进行一下记录，但仍有一些细节没有研究清楚，以后会继续进行更新"><a href="#对于tableView-的cell的重复用代码看似已经很熟悉，但是在上周五和请教池神的时候发下由于比较粗心已经一些习惯性的写法，不走心的写法，以至于发现以前代码中好多的错误，今写此博客进行一下记录，但仍有一些细节没有研究清楚，以后会继续进行更新" class="headerlink" title="对于tableView 的cell的重复用代码看似已经很熟悉，但是在上周五和请教池神的时候发下由于比较粗心已经一些习惯性的写法，不走心的写法，以至于发现以前代码中好多的错误，今写此博客进行一下记录，但仍有一些细节没有研究清楚，以后会继续进行更新"></a>对于tableView 的cell的重复用代码看似已经很熟悉，但是在上周五和请教池神的时候发下由于比较粗心已经一些习惯性的写法，不走心的写法，以至于发现以前代码中好多的错误，今写此博客进行一下记录，但仍有一些细节没有研究清楚，以后会继续进行更新</h4><h2 id="从registerNib-forCellReuseIdentifier-说起"><a href="#从registerNib-forCellReuseIdentifier-说起" class="headerlink" title="从registerNib:forCellReuseIdentifier 说起"></a>从registerNib:forCellReuseIdentifier 说起</h2><h5 id="在初学tableView的时候，似乎并未注意到以上两个方法，我们在tableView取cell的代理方法中通常吃这样写的"><a href="#在初学tableView的时候，似乎并未注意到以上两个方法，我们在tableView取cell的代理方法中通常吃这样写的" class="headerlink" title="在初学tableView的时候，似乎并未注意到以上两个方法，我们在tableView取cell的代理方法中通常吃这样写的"></a>在初学tableView的时候，似乎并未注意到以上两个方法，我们在tableView取cell的代理方法中通常吃这样写的</h5><p><img src="" alt="cell代理1"></p>
+<h5 id="先根据重用标识reuseId在重用池中取cell，由于在控制器第一此加载的时候，重用池中没有可以重用的cell，所以需要手动创建，注意创建cell的方法-instancetype-initWithStyle-UITableViewStyle-style-再次创建并初始化cell的时候，要赋值可重标识和cell的type，以便于下次重用。"><a href="#先根据重用标识reuseId在重用池中取cell，由于在控制器第一此加载的时候，重用池中没有可以重用的cell，所以需要手动创建，注意创建cell的方法-instancetype-initWithStyle-UITableViewStyle-style-再次创建并初始化cell的时候，要赋值可重标识和cell的type，以便于下次重用。" class="headerlink" title="先根据重用标识reuseId在重用池中取cell，由于在控制器第一此加载的时候，重用池中没有可以重用的cell，所以需要手动创建，注意创建cell的方法 -(instancetype)initWithStyle:(UITableViewStyle)style,再次创建并初始化cell的时候，要赋值可重标识和cell的type，以便于下次重用。"></a>先根据重用标识reuseId在重用池中取cell，由于在控制器第一此加载的时候，重用池中没有可以重用的cell，所以需要手动创建，注意创建cell的方法 -(instancetype)initWithStyle:(UITableViewStyle)style,再次创建并初始化cell的时候，要赋值可重标识和cell的type，以便于下次重用。</h5>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/15/日常技术小结(1)/" itemprop="url">
+                  日常技术小结（1）：0615
                 </a>
               
             
@@ -594,7 +688,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
