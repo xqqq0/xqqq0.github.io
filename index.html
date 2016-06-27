@@ -233,6 +233,116 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/27/项目授权流程/" itemprop="url">
+                  项目授权登录流程简记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-27T10:16:38+08:00" content="2016-06-27">
+              2016-06-27
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="HS项目的通过weibo授权登录过程大致分为四步"><a href="#HS项目的通过weibo授权登录过程大致分为四步" class="headerlink" title="HS项目的通过weibo授权登录过程大致分为四步"></a>HS项目的通过weibo授权登录过程大致分为四步</h4><ol>
+<li>利用weiboSDK进行授权，或者<code>userId</code>(用户id)，<code>accessToken</code>（weibo的token），<code>expirationDate</code>（token过期时刻），<code>refreshToken</code>（当认证口令过期时用于换取认证口令的更新口令）</li>
+<li>利用第一步中<code>userId</code>和<code>accessToke</code>和weiboSDK提供网络访问方法获取<code>昵称</code>和<code>头像</code></li>
+<li>利用获得到的<code>昵称</code>和<code>头像</code>以及拼接<code>userId</code>，<code>accessToken</code>，<code>refreshToken</code>以及其他的固定参数，来获取本系统的<code>uid</code>,<code>accessToken</code>,<code>昵称</code>和<code>头像</code></li>
+<li>通过本系统的token获取本系统的个人信息</li>
+</ol>
+<h1 id="具体介绍"><a href="#具体介绍" class="headerlink" title="具体介绍"></a>具体介绍</h1><h2 id="微博授权"><a href="#微博授权" class="headerlink" title="微博授权"></a>微博授权</h2><h4 id="本系统的微博的oauth2-0的授权方式是通过wieboSDK实现的"><a href="#本系统的微博的oauth2-0的授权方式是通过wieboSDK实现的" class="headerlink" title="本系统的微博的oauth2.0的授权方式是通过wieboSDK实现的"></a>本系统的微博的oauth2.0的授权方式是通过wieboSDK实现的</h4><p>1.发起请求<br><img src="http://o86uiyd40.bkt.clouddn.com/auth2.0SendRequest.png" alt=""><br><img src="http://o86uiyd40.bkt.clouddn.com/autho2.0%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82.png" alt=""><br>scope参数固定为 <code>&quot;all&quot;</code><br>redirectURI的参数为 <code>&quot;https://api.weibo.com/oauth2/default.html&quot;</code></p>
+<p>2.回调，在回调中获取response，在response获取<code>userId</code>，<code>accessToken</code>，<code>expirationDate</code>，<code>refreshToken</code></p>
+<p><img src="http://o86uiyd40.bkt.clouddn.com/auth2.0Response.png" alt=""></p>
+<h2 id="获取微博相关信息"><a href="#获取微博相关信息" class="headerlink" title="获取微博相关信息"></a>获取微博相关信息</h2><h4 id="微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的"><a href="#微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的" class="headerlink" title="微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的"></a>微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的</h4><ul>
+<li>利用<code>userId</code>和<code>accessToke</code>和weiboSDK提供网络访问方法获取<code>昵称</code>和<code>头像</code><br><img src="http://o86uiyd40.bkt.clouddn.com/%E8%8E%B7%E5%8F%96%E6%9C%AC%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE.png" alt=""></li>
+</ul>
+<h2 id="获取本系统的token等参数"><a href="#获取本系统的token等参数" class="headerlink" title="获取本系统的token等参数"></a>获取本系统的token等参数</h2><ul>
+<li>利用获得到的<code>昵称</code>和<code>头像</code>以及拼接<code>userId</code>，<code>accessToken</code>，<code>refreshToken</code>以及其他的固定参数，来获取本系统的<code>uid</code>,<code>accessToken</code>,<code>昵称</code>和<code>头像</code><br><img src="http://o86uiyd40.bkt.clouddn.com/%E8%8E%B7%E5%8F%96%E5%A4%B4%E5%83%8F%E5%92%8C%E6%98%B5%E7%A7%B0.png" alt=""></li>
+</ul>
+<h2 id="利用本系统的token获取本系统个人信息"><a href="#利用本系统的token获取本系统个人信息" class="headerlink" title="利用本系统的token获取本系统个人信息"></a>利用本系统的token获取本系统个人信息</h2><p><img src="http://o86uiyd40.bkt.clouddn.com/localInfo.png" alt=""></p>
+<p>#后记</p>
+<h4 id="博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理"><a href="#博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理" class="headerlink" title="博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理"></a>博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理</h4>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/20/关于cell重用的小计/" itemprop="url">
                   关于cell重用的小计
                 </a>
@@ -690,7 +800,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -724,7 +834,7 @@
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="https://sun-fox-cj.github.io" title="chishen’s Blog" target="_blank">chishen’s Blog</a>
+                  <a href="http://sun-fox-cj.github.io" title="chishen’s Blog" target="_blank">chishen’s Blog</a>
                 </li>
               
                 <li class="links-of-blogroll-item">

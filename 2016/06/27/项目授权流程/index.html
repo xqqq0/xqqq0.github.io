@@ -1,0 +1,589 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言HS项目的通过weibo授权登录过程大致分为四步
+利用weiboSDK进行授权，或者userId(用户id)，accessToken（weibo的token），expirationDate（token过期时刻），refreshToken（当认证口令过期时用于换取认证口令的更新口令）
+利用第一步中userId和accessToke和weiboSDK提供网络访问方法获取昵称和头像
+利用获得到的昵称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目授权登录流程简记">
+<meta property="og:url" content="https://xqqq0.github.io.git/2016/06/27/项目授权流程/index.html">
+<meta property="og:site_name" content="xiaoqin’s Blog">
+<meta property="og:description" content="前言HS项目的通过weibo授权登录过程大致分为四步
+利用weiboSDK进行授权，或者userId(用户id)，accessToken（weibo的token），expirationDate（token过期时刻），refreshToken（当认证口令过期时用于换取认证口令的更新口令）
+利用第一步中userId和accessToke和weiboSDK提供网络访问方法获取昵称和头像
+利用获得到的昵称">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/auth2.0SendRequest.png">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/autho2.0%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82.png">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/auth2.0Response.png">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/%E8%8E%B7%E5%8F%96%E6%9C%AC%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE.png">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/%E8%8E%B7%E5%8F%96%E5%A4%B4%E5%83%8F%E5%92%8C%E6%98%B5%E7%A7%B0.png">
+<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/localInfo.png">
+<meta property="og:updated_time" content="2016-06-27T03:45:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="项目授权登录流程简记">
+<meta name="twitter:description" content="前言HS项目的通过weibo授权登录过程大致分为四步
+利用weiboSDK进行授权，或者userId(用户id)，accessToken（weibo的token），expirationDate（token过期时刻），refreshToken（当认证口令过期时用于换取认证口令的更新口令）
+利用第一步中userId和accessToke和weiboSDK提供网络访问方法获取昵称和头像
+利用获得到的昵称">
+<meta name="twitter:image" content="http://o86uiyd40.bkt.clouddn.com/auth2.0SendRequest.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 项目授权登录流程简记 | xiaoqin’s Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">xiaoqin’s Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">生命不息奋斗不止</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                项目授权登录流程简记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-27T10:16:38+08:00" content="2016-06-27">
+              2016-06-27
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="HS项目的通过weibo授权登录过程大致分为四步"><a href="#HS项目的通过weibo授权登录过程大致分为四步" class="headerlink" title="HS项目的通过weibo授权登录过程大致分为四步"></a>HS项目的通过weibo授权登录过程大致分为四步</h4><ol>
+<li>利用weiboSDK进行授权，或者<code>userId</code>(用户id)，<code>accessToken</code>（weibo的token），<code>expirationDate</code>（token过期时刻），<code>refreshToken</code>（当认证口令过期时用于换取认证口令的更新口令）</li>
+<li>利用第一步中<code>userId</code>和<code>accessToke</code>和weiboSDK提供网络访问方法获取<code>昵称</code>和<code>头像</code></li>
+<li>利用获得到的<code>昵称</code>和<code>头像</code>以及拼接<code>userId</code>，<code>accessToken</code>，<code>refreshToken</code>以及其他的固定参数，来获取本系统的<code>uid</code>,<code>accessToken</code>,<code>昵称</code>和<code>头像</code></li>
+<li>通过本系统的token获取本系统的个人信息</li>
+</ol>
+<h1 id="具体介绍"><a href="#具体介绍" class="headerlink" title="具体介绍"></a>具体介绍</h1><h2 id="微博授权"><a href="#微博授权" class="headerlink" title="微博授权"></a>微博授权</h2><h4 id="本系统的微博的oauth2-0的授权方式是通过wieboSDK实现的"><a href="#本系统的微博的oauth2-0的授权方式是通过wieboSDK实现的" class="headerlink" title="本系统的微博的oauth2.0的授权方式是通过wieboSDK实现的"></a>本系统的微博的oauth2.0的授权方式是通过wieboSDK实现的</h4><p>1.发起请求<br><img src="http://o86uiyd40.bkt.clouddn.com/auth2.0SendRequest.png" alt=""><br><img src="http://o86uiyd40.bkt.clouddn.com/autho2.0%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82.png" alt=""><br>scope参数固定为 <code>&quot;all&quot;</code><br>redirectURI的参数为 <code>&quot;https://api.weibo.com/oauth2/default.html&quot;</code></p>
+<p>2.回调，在回调中获取response，在response获取<code>userId</code>，<code>accessToken</code>，<code>expirationDate</code>，<code>refreshToken</code></p>
+<p><img src="http://o86uiyd40.bkt.clouddn.com/auth2.0Response.png" alt=""></p>
+<h2 id="获取微博相关信息"><a href="#获取微博相关信息" class="headerlink" title="获取微博相关信息"></a>获取微博相关信息</h2><h4 id="微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的"><a href="#微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的" class="headerlink" title="微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的"></a>微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的</h4><ul>
+<li>利用<code>userId</code>和<code>accessToke</code>和weiboSDK提供网络访问方法获取<code>昵称</code>和<code>头像</code><br><img src="http://o86uiyd40.bkt.clouddn.com/%E8%8E%B7%E5%8F%96%E6%9C%AC%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE.png" alt=""></li>
+</ul>
+<h2 id="获取本系统的token等参数"><a href="#获取本系统的token等参数" class="headerlink" title="获取本系统的token等参数"></a>获取本系统的token等参数</h2><ul>
+<li>利用获得到的<code>昵称</code>和<code>头像</code>以及拼接<code>userId</code>，<code>accessToken</code>，<code>refreshToken</code>以及其他的固定参数，来获取本系统的<code>uid</code>,<code>accessToken</code>,<code>昵称</code>和<code>头像</code><br><img src="http://o86uiyd40.bkt.clouddn.com/%E8%8E%B7%E5%8F%96%E5%A4%B4%E5%83%8F%E5%92%8C%E6%98%B5%E7%A7%B0.png" alt=""></li>
+</ul>
+<h2 id="利用本系统的token获取本系统个人信息"><a href="#利用本系统的token获取本系统个人信息" class="headerlink" title="利用本系统的token获取本系统个人信息"></a>利用本系统的token获取本系统个人信息</h2><p><img src="http://o86uiyd40.bkt.clouddn.com/localInfo.png" alt=""></p>
+<p>#后记</p>
+<h4 id="博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理"><a href="#博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理" class="headerlink" title="博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理"></a>博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理</h4>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/关于cell重用的小计/" rel="next" title="关于cell重用的小计">
+                <i class="fa fa-chevron-left"></i> 关于cell重用的小计
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o86uiyd40.bkt.clouddn.com/12.png"
+               alt="风花树" />
+          <p class="site-author-name" itemprop="name">风花树</p>
+          <p class="site-description motion-element" itemprop="description">Beyond their own</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情连接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/xqqq0" title="github" target="_blank">github</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sun-fox-cj.github.io" title="chishen’s Blog" target="_blank">chishen’s Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cocoachina.com" title="cocoachina" target="_blank">cocoachina</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HS项目的通过weibo授权登录过程大致分为四步"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">HS项目的通过weibo授权登录过程大致分为四步</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体介绍"><span class="nav-number">2.</span> <span class="nav-text">具体介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#微博授权"><span class="nav-number">2.1.</span> <span class="nav-text">微博授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本系统的微博的oauth2-0的授权方式是通过wieboSDK实现的"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">本系统的微博的oauth2.0的授权方式是通过wieboSDK实现的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取微博相关信息"><span class="nav-number">2.2.</span> <span class="nav-text">获取微博相关信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">微博中的先关信息也是通过wieboSDK中特定网络访问方法实现的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取本系统的token等参数"><span class="nav-number">2.3.</span> <span class="nav-text">获取本系统的token等参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用本系统的token获取本系统个人信息"><span class="nav-number">2.4.</span> <span class="nav-text">利用本系统的token获取本系统个人信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理"><span class="nav-number">2.4.0.1.</span> <span class="nav-text">博客中的贴图为线上代码所截图，在自己仿写的过程中逻辑何不严谨，仅仅关注与数据获取是否成功正确，未根据业务场景进行具体的判断或者对数据的处理</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">风花树</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
