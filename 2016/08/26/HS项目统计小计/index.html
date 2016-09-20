@@ -84,29 +84,37 @@
 
 
 
-<meta name="description" content="前言在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：
-一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。
-swift是这样的
-还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行">
+<meta name="description" content="前言本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述具体步骤
+配置事件的唯一key值主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出
+后台键值示例
+类文件添加示例
+
+
+
+1234567891011let kEventMyLike = &amp;quot;CUSTOM_EVENT_USERLIKE_FRAGMENT&amp;quot;//">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UITableView 分隔线小记">
-<meta property="og:url" content="https://xqqq0.github.io.git/2016/08/26/tableView分隔线小计/index.html">
+<meta property="og:title" content="HS项目中点击事件以及页面事件统计的流程（上）">
+<meta property="og:url" content="https://xqqq0.github.io.git/2016/08/26/HS项目统计小计/index.html">
 <meta property="og:site_name" content="xiaoqin’s Blog">
-<meta property="og:description" content="前言在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：
-一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。
-swift是这样的
-还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine0.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine1.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine2.png">
-<meta property="og:updated_time" content="2016-08-26T03:34:19.000Z">
+<meta property="og:description" content="前言本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述具体步骤
+配置事件的唯一key值主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出
+后台键值示例
+类文件添加示例
+
+
+
+1234567891011let kEventMyLike = &amp;quot;CUSTOM_EVENT_USERLIKE_FRAGMENT&amp;quot;//">
+<meta property="og:updated_time" content="2016-09-20T08:46:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UITableView 分隔线小记">
-<meta name="twitter:description" content="前言在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：
-一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。
-swift是这样的
-还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行">
-<meta name="twitter:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine0.png">
+<meta name="twitter:title" content="HS项目中点击事件以及页面事件统计的流程（上）">
+<meta name="twitter:description" content="前言本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述具体步骤
+配置事件的唯一key值主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出
+后台键值示例
+类文件添加示例
+
+
+
+1234567891011let kEventMyLike = &amp;quot;CUSTOM_EVENT_USERLIKE_FRAGMENT&amp;quot;//">
 
 
 
@@ -124,7 +132,7 @@ swift是这样的
   };
 </script>
 
-  <title> UITableView 分隔线小记 | xiaoqin’s Blog </title>
+  <title> HS项目中点击事件以及页面事件统计的流程（上） | xiaoqin’s Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +252,7 @@ swift是这样的
             
             
               
-                UITableView 分隔线小记
+                HS项目中点击事件以及页面事件统计的流程（上）
               
             
           </h1>
@@ -284,13 +292,24 @@ swift是这样的
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："><a href="#在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：" class="headerlink" title="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："></a>在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine0.png" alt=""></p>
-<h4 id="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"><a href="#一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。" class="headerlink" title="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"></a>一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine1.png" alt=""></p>
-<h4 id="swift是这样的"><a href="#swift是这样的" class="headerlink" title="swift是这样的"></a>swift是这样的</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine2.png" alt=""></p>
-<h4 id="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"><a href="#还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑" class="headerlink" title="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"></a>还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了<a href="http://sun-fox-cj.github.io" target="_blank" rel="external">@池神</a>的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑</h4><ul>
-<li>layoutMargins两个组件必须都要设置的</li>
-<li>separatorInset 至少其中一个组件要设置，可以两个都设置</li>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述"><a href="#本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述" class="headerlink" title="本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述"></a>本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述</h4><h1 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h1><ol>
+<li>配置事件的唯一key值<h4 id="主要是在-HSStatisticsMacro-类中添加字符串，此key值由后台给出"><a href="#主要是在-HSStatisticsMacro-类中添加字符串，此key值由后台给出" class="headerlink" title="主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出"></a>主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出</h4><ul>
+<li>后台键值示例<br><img src="" alt=""></li>
+<li>类文件添加示例</li>
 </ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let kEventMyLike = &quot;CUSTOM_EVENT_USERLIKE_FRAGMENT&quot;</span><br><span class="line">/// 我的反馈页面</span><br><span class="line">let kEventMyFeedback = &quot;CUSTOM_EVENT_USERFEEDBACK_FRAGMENT&quot;</span><br><span class="line">/// 搜索页面</span><br><span class="line">let kEventSearch = &quot;CUSTOM_EVENT_SEARCH_FRAGMENT&quot;</span><br><span class="line">/// 搜索结果页面</span><br><span class="line">let kEventSearchResult = &quot;CUSTOM_EVENT_SEARCHRESULT_FRAGMENT&quot;</span><br><span class="line">/// 开机欢迎页面 TODO</span><br><span class="line">let kEventLaunch = &quot;CUSTOM_EVENT_WELCOME_FRAGMENT&quot;</span><br><span class="line">/// 品花生页面(停留时间)</span><br><span class="line">let kPinHuaSheng = &quot;CUSTOM_EVENT_PINHUASHENG_FRAGMENT&quot;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>根据key值定义相应的统计方法<h4 id="主要是在-HSStatisticsManager-中添加静态方法，参数包裹在HSStatisticsInfo-结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr"><a href="#主要是在-HSStatisticsManager-中添加静态方法，参数包裹在HSStatisticsInfo-结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr" class="headerlink" title="主要是在 HSStatisticsManager 中添加静态方法，参数包裹在HSStatisticsInfo 结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr"></a>主要是在 HSStatisticsManager 中添加静态方法，参数包裹在HSStatisticsInfo 结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr</h4><ul>
+<li>结构体图</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct HSStatisticsInfo &#123;</span><br><span class="line">    </span><br><span class="line">    var rid: String</span><br><span class="line">    var position: String</span><br><span class="line">    var extra: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在具体页面进行调用</li>
+</ol>
 
       
     </div>
@@ -315,13 +334,17 @@ swift是这样的
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/26/HS项目统计小计/" rel="next" title="HS项目中点击事件以及页面事件统计的流程（上）">
-                <i class="fa fa-chevron-left"></i> HS项目中点击事件以及页面事件统计的流程（上）
+              <a href="/2016/06/27/项目授权流程/" rel="next" title="项目授权登录流程简记">
+                <i class="fa fa-chevron-left"></i> 项目授权登录流程简记
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/26/tableView分隔线小计/" rel="prev" title="UITableView 分隔线小记">
+                UITableView 分隔线小记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -443,7 +466,7 @@ swift是这样的
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#swift是这样的"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">swift是这样的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体步骤"><span class="nav-number">2.</span> <span class="nav-text">具体步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要是在-HSStatisticsMacro-类中添加字符串，此key值由后台给出"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主要是在-HSStatisticsManager-中添加静态方法，参数包裹在HSStatisticsInfo-结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">主要是在 HSStatisticsManager 中添加静态方法，参数包裹在HSStatisticsInfo 结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
