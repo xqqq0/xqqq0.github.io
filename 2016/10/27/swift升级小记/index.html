@@ -84,29 +84,23 @@
 
 
 
-<meta name="description" content="前言在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：
-一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。
-swift是这样的
-还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行">
+<meta name="description" content="##文章系转载，原出处为http://sun-fox-cj.github.io/2016/10/26/swift升级小记/，更多精品技术文章请访问http://sun-fox-cj.github.io
+问题xcode8出了这么久, 眼看8.1要出来了, 根据苹果以往的强硬的态度, 估计在8.1就要强制使用了. 但是公司的代码用swift写的, 伴随这次的还有swift3.0, 我们还用了一些swi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UITableView 分隔线小记">
-<meta property="og:url" content="https://xqqq0.github.io.git/2016/08/26/tableView分隔线小计/index.html">
+<meta property="og:title" content="swift升级小记">
+<meta property="og:url" content="https://xqqq0.github.io.git/2016/10/27/swift升级小记/index.html">
 <meta property="og:site_name" content="xiaoqin’s Blog">
-<meta property="og:description" content="前言在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：
-一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。
-swift是这样的
-还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine0.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine1.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine2.png">
-<meta property="og:updated_time" content="2016-08-26T03:34:19.000Z">
+<meta property="og:description" content="##文章系转载，原出处为http://sun-fox-cj.github.io/2016/10/26/swift升级小记/，更多精品技术文章请访问http://sun-fox-cj.github.io
+问题xcode8出了这么久, 眼看8.1要出来了, 根据苹果以往的强硬的态度, 估计在8.1就要强制使用了. 但是公司的代码用swift写的, 伴随这次的还有swift3.0, 我们还用了一些swi">
+<meta property="og:image" content="http://7xpsbt.com1.z0.glb.clouddn.com/Convert.png">
+<meta property="og:image" content="http://7xpsbt.com1.z0.glb.clouddn.com/choose2.png">
+<meta property="og:image" content="http://7xpsbt.com1.z0.glb.clouddn.com/thirdLib.png">
+<meta property="og:updated_time" content="2016-10-27T01:19:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UITableView 分隔线小记">
-<meta name="twitter:description" content="前言在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：
-一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。
-swift是这样的
-还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行">
-<meta name="twitter:image" content="http://o86uiyd40.bkt.clouddn.com/sepLine0.png">
+<meta name="twitter:title" content="swift升级小记">
+<meta name="twitter:description" content="##文章系转载，原出处为http://sun-fox-cj.github.io/2016/10/26/swift升级小记/，更多精品技术文章请访问http://sun-fox-cj.github.io
+问题xcode8出了这么久, 眼看8.1要出来了, 根据苹果以往的强硬的态度, 估计在8.1就要强制使用了. 但是公司的代码用swift写的, 伴随这次的还有swift3.0, 我们还用了一些swi">
+<meta name="twitter:image" content="http://7xpsbt.com1.z0.glb.clouddn.com/Convert.png">
 
 
 
@@ -124,7 +118,7 @@ swift是这样的
   };
 </script>
 
-  <title> UITableView 分隔线小记 | xiaoqin’s Blog </title>
+  <title> swift升级小记 | xiaoqin’s Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +238,7 @@ swift是这样的
             
             
               
-                UITableView 分隔线小记
+                swift升级小记
               
             
           </h1>
@@ -256,8 +250,8 @@ swift是这样的
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-26T10:13:47+08:00" content="2016-08-26">
-              2016-08-26
+            <time itemprop="dateCreated" datetime="2016-10-27T09:07:25+08:00" content="2016-10-27">
+              2016-10-27
             </time>
           </span>
 
@@ -284,13 +278,30 @@ swift是这样的
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："><a href="#在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：" class="headerlink" title="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："></a>在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine0.png" alt=""></p>
-<h4 id="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"><a href="#一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。" class="headerlink" title="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"></a>一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine1.png" alt=""></p>
-<h4 id="swift是这样的"><a href="#swift是这样的" class="headerlink" title="swift是这样的"></a>swift是这样的</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine2.png" alt=""></p>
-<h4 id="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"><a href="#还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑" class="headerlink" title="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"></a>还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了<a href="http://sun-fox-cj.github.io" target="_blank" rel="external">@池神</a>的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑</h4><ul>
-<li>layoutMargins两个组件必须都要设置的</li>
-<li>separatorInset 至少其中一个组件要设置，可以两个都设置</li>
+        <p>##文章系转载，原出处为<a href="http://sun-fox-cj.github.io/2016/10/26/swift升级小记/" target="_blank" rel="external">http://sun-fox-cj.github.io/2016/10/26/swift升级小记/</a>，更多精品技术文章请访问<a href="http://sun-fox-cj.github.io" target="_blank" rel="external">http://sun-fox-cj.github.io</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>xcode8出了这么久, 眼看8.1要出来了, 根据苹果以往的强硬的态度, 估计在8.1就要强制使用了. 但是公司的代码用swift写的, 伴随这次的还有swift3.0, 我们还用了一些swift的三方库, 更新起来, 那叫一个酸爽. 所以一直没敢动. 今天打算先用自己写的项目练练手, 发现这东西需要点技巧. 记录一下, 福利大家.</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>首先, 我这个文章写于2016年10月26号, 如果你看到的时间比较久远了, 我不保证这个办法生效.<br><br>其次, 我的最低环境是iOS8.<br><br>那么我们进入正题</p>
+<h3 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h3><ul>
+<li>别指望直接升级到3.0, 否则你会经历一个过山车般的情绪波动.</li>
+<li>首先打开你的pod文件, 这里以我项目用到的一些swift库为例 保证</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">platform :ios, &apos;8.0&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">post_install do |installer|</span><br><span class="line">    installer.pods_project.targets.each do |target|</span><br><span class="line">        target.build_configurations.each do |config|</span><br><span class="line">            config.build_settings[&apos;SWIFT_VERSION&apos;] = &apos;2.3&apos;</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;SnapKit&apos;, &apos;0.22.0&apos;</span><br><span class="line">pod &apos;SwiftyJSON&apos;, &apos;2.4.0&apos;</span><br></pre></td></tr></table></figure>
+<p>这里注意那个2.3, 如果你想试试3.0, 那就改成3.0</p>
+<ul>
+<li>pod update 或者 pod update –no-repo-update 如果你刚更新不久, 那就第二个, 原理类似maven</li>
+<li>进入项目</li>
+</ul>
+<p><img src="http://7xpsbt.com1.z0.glb.clouddn.com/Convert.png" alt="convert"></p>
+<p>选择convert</p>
+<p><img src="http://7xpsbt.com1.z0.glb.clouddn.com/choose2.png" alt="choose"></p>
+<p>选择你要的版本</p>
+<p><img src="http://7xpsbt.com1.z0.glb.clouddn.com/thirdLib.png" alt=""></p>
+<p>这里直选系统的东西, 三方库都不管, 因为你的podupdate的时候, 已经搞定了.<br>然后就进去, 等读条, 如果不出意外, 不会有太多的问题, 改一改就OK了.</p>
+<blockquote>
+<p>另：在本博客发表时，FileKit框架虽然在github上已经release了4.0.0,猜测是为了swift3.0的的beata版本，当引入此版本时，且Xcode调整为swift2.3的时候，次框架报错，故需要修改podFile为 pod ‘FileKit’,’&lt;4.0.0’,此时pod会导入3.0.0的版本</p>
+</blockquote>
 
       
     </div>
@@ -315,17 +326,13 @@ swift是这样的
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/26/HS项目统计小计/" rel="next" title="HS项目中点击事件以及页面事件统计的流程（上）">
-                <i class="fa fa-chevron-left"></i> HS项目中点击事件以及页面事件统计的流程（上）
+              <a href="/2016/08/26/tableView分隔线小计/" rel="next" title="UITableView 分隔线小记">
+                <i class="fa fa-chevron-left"></i> UITableView 分隔线小记
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/27/swift升级小记/" rel="prev" title="swift升级小记">
-                swift升级小记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -447,7 +454,7 @@ swift是这样的
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#swift是这样的"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">swift是这样的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正题"><span class="nav-number">2.1.</span> <span class="nav-text">正题</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

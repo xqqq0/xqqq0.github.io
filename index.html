@@ -233,8 +233,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/26/HS项目统计小计/" itemprop="url">
-                  HS项目中点击事件以及页面事件统计的流程（上）
+                <a class="post-title-link" href="/2016/10/27/swift升级小记/" itemprop="url">
+                  swift升级小记
                 </a>
               
             
@@ -247,8 +247,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-26T10:13:47+08:00" content="2016-08-26">
-              2016-08-26
+            <time itemprop="dateCreated" datetime="2016-10-27T09:07:25+08:00" content="2016-10-27">
+              2016-10-27
             </time>
           </span>
 
@@ -277,19 +277,30 @@
       
         
           
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述"><a href="#本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述" class="headerlink" title="本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述"></a>本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述</h4><h1 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h1><ol>
-<li>配置事件的唯一key值<h4 id="主要是在-HSStatisticsMacro-类中添加字符串，此key值由后台给出"><a href="#主要是在-HSStatisticsMacro-类中添加字符串，此key值由后台给出" class="headerlink" title="主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出"></a>主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出</h4><ul>
-<li>后台键值示例<br><img src="http://o86uiyd40.bkt.clouddn.com/%E7%B2%98%E8%B4%B4%E5%9B%BE%E7%89%87.png" alt=""></li>
-<li>类文件添加示例</li>
+            <p>##文章系转载，原出处为<a href="http://sun-fox-cj.github.io/2016/10/26/swift升级小记/" target="_blank" rel="external">http://sun-fox-cj.github.io/2016/10/26/swift升级小记/</a>，更多精品技术文章请访问<a href="http://sun-fox-cj.github.io" target="_blank" rel="external">http://sun-fox-cj.github.io</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>xcode8出了这么久, 眼看8.1要出来了, 根据苹果以往的强硬的态度, 估计在8.1就要强制使用了. 但是公司的代码用swift写的, 伴随这次的还有swift3.0, 我们还用了一些swift的三方库, 更新起来, 那叫一个酸爽. 所以一直没敢动. 今天打算先用自己写的项目练练手, 发现这东西需要点技巧. 记录一下, 福利大家.</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>首先, 我这个文章写于2016年10月26号, 如果你看到的时间比较久远了, 我不保证这个办法生效.<br><br>其次, 我的最低环境是iOS8.<br><br>那么我们进入正题</p>
+<h3 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h3><ul>
+<li>别指望直接升级到3.0, 否则你会经历一个过山车般的情绪波动.</li>
+<li>首先打开你的pod文件, 这里以我项目用到的一些swift库为例 保证</li>
 </ul>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let kEventMyLike = &quot;CUSTOM_EVENT_USERLIKE_FRAGMENT&quot;</span><br><span class="line">/// 我的反馈页面</span><br><span class="line">let kEventMyFeedback = &quot;CUSTOM_EVENT_USERFEEDBACK_FRAGMENT&quot;</span><br><span class="line">/// 搜索页面</span><br><span class="line">let kEventSearch = &quot;CUSTOM_EVENT_SEARCH_FRAGMENT&quot;</span><br><span class="line">/// 搜索结果页面</span><br><span class="line">let kEventSearchResult = &quot;CUSTOM_EVENT_SEARCHRESULT_FRAGMENT&quot;</span><br><span class="line">/// 开机欢迎页面 TODO</span><br><span class="line">let kEventLaunch = &quot;CUSTOM_EVENT_WELCOME_FRAGMENT&quot;</span><br><span class="line">/// 品花生页面(停留时间)</span><br><span class="line">let kPinHuaSheng = &quot;CUSTOM_EVENT_PINHUASHENG_FRAGMENT&quot;</span><br></pre></td></tr></table></figure>
-<p>2 . 根据key值定义相应的统计方法</p>
-<h4 id="主要是在-HSStatisticsManager-中添加静态方法"><a href="#主要是在-HSStatisticsManager-中添加静态方法" class="headerlink" title="主要是在 HSStatisticsManager 中添加静态方法"></a>主要是在 HSStatisticsManager 中添加静态方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">///  发现页面-品花生(记录停留时间)</span><br><span class="line">static func discoverPSH() &#123;</span><br><span class="line">    shareInstance.addEvent(kPinHuaSheng, statisticInfo: nil)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>####参数包裹在HSStatisticsInfo 结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct HSStatisticsInfo &#123;</span><br><span class="line">    </span><br><span class="line">    var rid: String</span><br><span class="line">    var position: String</span><br><span class="line">    var extra: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>3 .  在具体页面进行调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line">    </span><br><span class="line">    isNeedAccessTokenParam = true</span><br><span class="line">    pageSourceType = HSPageSourceType.PinPeanut</span><br><span class="line">    </span><br><span class="line">    view.addSubview(webView)</span><br><span class="line">    webView.snp_makeConstraints &#123; (make) in</span><br><span class="line">        make.edges.equalTo(view)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let urlRequest = NSURLRequest(URL: self.url!)</span><br><span class="line">    webView.loadRequest(urlRequest)</span><br><span class="line">    </span><br><span class="line">    HSStatisticsManager.discoverPSH()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">platform :ios, &apos;8.0&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">post_install do |installer|</span><br><span class="line">    installer.pods_project.targets.each do |target|</span><br><span class="line">        target.build_configurations.each do |config|</span><br><span class="line">            config.build_settings[&apos;SWIFT_VERSION&apos;] = &apos;2.3&apos;</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;SnapKit&apos;, &apos;0.22.0&apos;</span><br><span class="line">pod &apos;SwiftyJSON&apos;, &apos;2.4.0&apos;</span><br></pre></td></tr></table></figure>
+<p>这里注意那个2.3, 如果你想试试3.0, 那就改成3.0</p>
+<ul>
+<li>pod update 或者 pod update –no-repo-update 如果你刚更新不久, 那就第二个, 原理类似maven</li>
+<li>进入项目</li>
+</ul>
+<p><img src="http://7xpsbt.com1.z0.glb.clouddn.com/Convert.png" alt="convert"></p>
+<p>选择convert</p>
+<p><img src="http://7xpsbt.com1.z0.glb.clouddn.com/choose2.png" alt="choose"></p>
+<p>选择你要的版本</p>
+<p><img src="http://7xpsbt.com1.z0.glb.clouddn.com/thirdLib.png" alt=""></p>
+<p>这里直选系统的东西, 三方库都不管, 因为你的podupdate的时候, 已经搞定了.<br>然后就进去, 等读条, 如果不出意外, 不会有太多的问题, 改一改就OK了.</p>
+<blockquote>
+<p>另：在本博客发表时，FileKit框架虽然在github上已经release了4.0.0,猜测是为了swift3.0的的beata版本，当引入此版本时，且Xcode调整为swift2.3的时候，次框架报错，故需要修改podFile为 pod ‘FileKit’,’&lt;4.0.0’,此时pod会导入3.0.0的版本</p>
+</blockquote>
 
           
         
@@ -390,6 +401,112 @@
 <li>layoutMargins两个组件必须都要设置的</li>
 <li>separatorInset 至少其中一个组件要设置，可以两个都设置</li>
 </ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/26/HS项目统计小计/" itemprop="url">
+                  HS项目中点击事件以及页面事件统计的流程（上）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-26T10:13:47+08:00" content="2016-08-26">
+              2016-08-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述"><a href="#本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述" class="headerlink" title="本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述"></a>本文主要记述HS项目中的页面事件的统计，点击事件后续添加。本文主要记述操作流程，原理暂不赘述</h4><h1 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h1><ol>
+<li>配置事件的唯一key值<h4 id="主要是在-HSStatisticsMacro-类中添加字符串，此key值由后台给出"><a href="#主要是在-HSStatisticsMacro-类中添加字符串，此key值由后台给出" class="headerlink" title="主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出"></a>主要是在 HSStatisticsMacro 类中添加字符串，此key值由后台给出</h4><ul>
+<li>后台键值示例<br><img src="http://o86uiyd40.bkt.clouddn.com/%E7%B2%98%E8%B4%B4%E5%9B%BE%E7%89%87.png" alt=""></li>
+<li>类文件添加示例</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let kEventMyLike = &quot;CUSTOM_EVENT_USERLIKE_FRAGMENT&quot;</span><br><span class="line">/// 我的反馈页面</span><br><span class="line">let kEventMyFeedback = &quot;CUSTOM_EVENT_USERFEEDBACK_FRAGMENT&quot;</span><br><span class="line">/// 搜索页面</span><br><span class="line">let kEventSearch = &quot;CUSTOM_EVENT_SEARCH_FRAGMENT&quot;</span><br><span class="line">/// 搜索结果页面</span><br><span class="line">let kEventSearchResult = &quot;CUSTOM_EVENT_SEARCHRESULT_FRAGMENT&quot;</span><br><span class="line">/// 开机欢迎页面 TODO</span><br><span class="line">let kEventLaunch = &quot;CUSTOM_EVENT_WELCOME_FRAGMENT&quot;</span><br><span class="line">/// 品花生页面(停留时间)</span><br><span class="line">let kPinHuaSheng = &quot;CUSTOM_EVENT_PINHUASHENG_FRAGMENT&quot;</span><br></pre></td></tr></table></figure>
+<p>2 . 根据key值定义相应的统计方法</p>
+<h4 id="主要是在-HSStatisticsManager-中添加静态方法"><a href="#主要是在-HSStatisticsManager-中添加静态方法" class="headerlink" title="主要是在 HSStatisticsManager 中添加静态方法"></a>主要是在 HSStatisticsManager 中添加静态方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">///  发现页面-品花生(记录停留时间)</span><br><span class="line">static func discoverPSH() &#123;</span><br><span class="line">    shareInstance.addEvent(kPinHuaSheng, statisticInfo: nil)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####参数包裹在HSStatisticsInfo 结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct HSStatisticsInfo &#123;</span><br><span class="line">    </span><br><span class="line">    var rid: String</span><br><span class="line">    var position: String</span><br><span class="line">    var extra: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3 .  在具体页面进行调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line">    </span><br><span class="line">    isNeedAccessTokenParam = true</span><br><span class="line">    pageSourceType = HSPageSourceType.PinPeanut</span><br><span class="line">    </span><br><span class="line">    view.addSubview(webView)</span><br><span class="line">    webView.snp_makeConstraints &#123; (make) in</span><br><span class="line">        make.edges.equalTo(view)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let urlRequest = NSURLRequest(URL: self.url!)</span><br><span class="line">    webView.loadRequest(urlRequest)</span><br><span class="line">    </span><br><span class="line">    HSStatisticsManager.discoverPSH()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1005,7 +1122,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
