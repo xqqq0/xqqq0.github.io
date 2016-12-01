@@ -868,6 +868,121 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/06/HS1.6所得/" itemprop="url">
+                  HS1.6版本所得
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-06T08:25:00+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="tableView滚动到底部"><a href="#tableView滚动到底部" class="headerlink" title="tableView滚动到底部"></a>tableView滚动到底部</h3><p>场景一般出现在一些聊天软件，比如QQ微信，数据的加载方式和显示方式和通常的tableView的是不一样的，一般最新的数据是索引都是靠在最前的，最新的数据显示到最后，这里有两个点</p>
+<ul>
+<li>tableView滚动到底部</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let indexPath = NSIndexPath(forRow: wSelf.myFbDataManager.myFbData.count - 1, inSection: 0)</span><br><span class="line">tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)</span><br><span class="line">将 indexPath 设置为最后一个，动画效果去掉</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>数据处理</p>
+<ol>
+<li><p>后台处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">每一页的数据都要逆序返回，别不正常的数据是</span><br><span class="line">1.XXX</span><br><span class="line">2.XXX</span><br><span class="line">3.XXX</span><br><span class="line">4.XXX</span><br><span class="line">但是由于最新的数据显示到最后，那么需要将数据逆序返回</span><br><span class="line">4.XXX</span><br><span class="line">3.XXX</span><br><span class="line">2.XXX</span><br><span class="line">1.XXX</span><br></pre></td></tr></table></figure>
+<p>2.前台处理<br>前台在数据拼接的时候也要注意，假设有有8条数据，每页显示四条，正常情况下后台是先返回1，2，3，4，然后在append(元素)，或者appendContentsOf(集合)，整体变为5.6.7.8。但是基于现有需求，后台返回的顺序是4.3.2.1/8.7.6.5，每次都要把最新的数据放在最前，有点像栈的结构，我们要的数据是8.7.6.5.4.3.2.1，所以要先用一个数据暂存一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wSelf.totalCount = json[&quot;data&quot;][&quot;count&quot;].intValue</span><br><span class="line"> let temp = wSelf.myFbData</span><br><span class="line"> wSelf.myFbData.removeAll()</span><br><span class="line"> for item in json[&quot;data&quot;][&quot;rows&quot;].arrayValue &#123;</span><br><span class="line"> wSelf.myFbData.append(HSMyFeedbackInfo(json: item))</span><br><span class="line"> &#125;</span><br><span class="line"> wSelf.myFbData.appendContentsOf(temp)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="解决控制台打印"><a href="#解决控制台打印" class="headerlink" title="解决控制台打印"></a>解决控制台打印</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Setting the background color on UITableViewHeaderFooterView has been deprecated. Please use contentView.backgroundColor instead.</span><br></pre></td></tr></table></figure>
+<p>控制台出现这种情况一般不会影响功能，但是打印太多太烦了，其实提示的已经很明白了,说 UITableViewHeaderFooterView 设置背景的方法已经失败，其实我通过查了一些资料发现是在自定义的xib的时候设置了背景色，只要还原回default color就行了，然后在绑定的类中进行设置。</p>
+<h3 id="xib为view和为控制器的不同的初始化方法"><a href="#xib为view和为控制器的不同的初始化方法" class="headerlink" title="xib为view和为控制器的不同的初始化方法"></a>xib为view和为控制器的不同的初始化方法</h3><ul>
+<li>控制器的3种创建方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 纯代码</span><br><span class="line">2.</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/06/初识swift项目的mcvm结构/" itemprop="url">
                   初识Swift项目的MCVM结构
                 </a>
@@ -1124,7 +1239,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
