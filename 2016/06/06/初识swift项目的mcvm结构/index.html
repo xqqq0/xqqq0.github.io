@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -108,35 +108,19 @@
 
 
 
-<script type="text/javascript" id="hexo.configurations">
+<script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
     scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 0,
       author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
-
-
-
-  <link rel="canonical" href="https://xqqq0.github.io.git/2016/06/06/初识swift项目的mcvm结构/"/>
-
-
-
-
 
   <title> 初识Swift项目的MCVM结构 | xiaoqin’s Blog </title>
 </head>
@@ -173,9 +157,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-    
-      <p class="site-subtitle">生命不息奋斗不止</p>
-    
+  <p class="site-subtitle">生命不息奋斗不止</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -230,8 +212,6 @@
   
 </nav>
 
-
-
  </div>
     </header>
 
@@ -245,26 +225,13 @@
     
 
   
+  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://xqqq0.github.io.git/2016/06/06/初识swift项目的mcvm结构/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="风花树">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://o86uiyd40.bkt.clouddn.com/12.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="xiaoqin’s Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="xiaoqin’s Blog" src="">
-    </span>
-  </span>
 
     
       <header class="post-header">
@@ -283,21 +250,13 @@
 
         <div class="post-meta">
           <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-06T08:25:00+08:00">
-                2016-06-06
-              </time>
-            
-
-            
-
-            
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-06T08:25:00+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
           </span>
 
           
@@ -312,9 +271,6 @@
           
 
           
-
-          
-
         </div>
       </header>
     
@@ -374,7 +330,6 @@
     <div>
       
         
-
       
     </div>
 
@@ -384,7 +339,6 @@
 
       
     </div>
-
 
     <footer class="post-footer">
       
@@ -398,8 +352,6 @@
               </a>
             
           </div>
-
-          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -462,7 +414,7 @@
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://o86uiyd40.bkt.clouddn.com/12.png"
@@ -471,15 +423,12 @@
           <p class="site-description motion-element" itemprop="description">Beyond their own</p>
         </div>
         <nav class="site-state motion-element">
-        
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
 
           
 
@@ -521,27 +470,19 @@
           </div>
         
 
-        
-
-
       </section>
 
       
-      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
-
             
               
             
-
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码的结构及调用顺序分析"><span class="nav-number">2.</span> <span class="nav-text">代码的结构及调用顺序分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manager"><span class="nav-number">3.</span> <span class="nav-text">Manager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller"><span class="nav-number">4.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cell"><span class="nav-number">5.</span> <span class="nav-text">Cell</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#systemLayoutSizeFittingSize"><span class="nav-number">5.1.</span> <span class="nav-text">systemLayoutSizeFittingSize</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parameters"><span class="nav-number">5.2.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fitting-Size"><span class="nav-number">5.3.</span> <span class="nav-text">Fitting Size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UILayoutFittingCompressedSize"><span class="nav-number">5.4.</span> <span class="nav-text">UILayoutFittingCompressedSize</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UILayoutFittingExpandedSize"><span class="nav-number">5.5.</span> <span class="nav-text">UILayoutFittingExpandedSize</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数总结"><span class="nav-number">5.6.</span> <span class="nav-text">函数总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据源方法的执行顺序"><span class="nav-number">5.6.1.</span> <span class="nav-text">数据源方法的执行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#（1）tableView-tableView-UITableView-numberOfRowsInSection-section-Int-gt-Int"><span class="nav-number">5.6.1.1.</span> <span class="nav-text">（1）tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（2）tableView-tableView-UITableView-cellForRowAtIndexPath-indexPath-NSIndexPath-gt-UITableViewCell"><span class="nav-number">5.6.1.2.</span> <span class="nav-text">（2）tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代理方法的执行顺序"><span class="nav-number">5.6.2.</span> <span class="nav-text">代理方法的执行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#（1）tableView-tableView-UITableView-estimatedHeightForRowAtIndexPath-indexPath-NSIndexPath-gt-CGFloat"><span class="nav-number">5.6.2.1.</span> <span class="nav-text">（1）tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（2-1）tableView-tableView-UITableView-heightForRowAtIndexPath-indexPath-NSIndexPath-gt-CGFloat"><span class="nav-number">5.6.2.2.</span> <span class="nav-text">（2.1）tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（2-2）tableView-tableView-UITableView-willDisplayCell-cell-UITableViewCell-forRowAtIndexPath-indexPath-NSIndexPath-gt-引入此代理就是为了将cell的创建和灌入数据彻底分开，此方法用于灌值"><span class="nav-number">5.6.2.3.</span> <span class="nav-text">（2.2）tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) ===>引入此代理就是为了将cell的创建和灌入数据彻底分开，此方法用于灌值</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cell展示顺序和数据的灌入（即行高的计算）的矛盾"><span class="nav-number">5.6.3.</span> <span class="nav-text">cell展示顺序和数据的灌入（即行高的计算）的矛盾</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案"><span class="nav-number">5.6.4.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tableView中的调用"><span class="nav-number">5.6.5.</span> <span class="nav-text">tableView中的调用</span></a></li></ol></li></ol></li></ol></div>
             
-
           </div>
         </section>
-      <!--/noindex-->
       
 
     </div>
@@ -564,9 +505,8 @@
   <span class="author" itemprop="copyrightHolder">风花树</span>
 </div>
 
-
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -575,7 +515,6 @@
     NexT.Muse
   </a>
 </div>
-
 
         
 
@@ -609,61 +548,50 @@
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
 
 
 
   
 
 
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
 
   
-
-
-
-
-	
-
-
 
 
 
@@ -674,15 +602,11 @@
 
   
   
-
   
 
   
 
   
-
-  
-
 
 </body>
 </html>
