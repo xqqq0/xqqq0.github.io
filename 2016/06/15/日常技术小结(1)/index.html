@@ -1,303 +1,100 @@
-<!doctype html>
 
 
-
-  
-
-
-<html class="theme-next muse use-motion">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=44218032" charset="UTF-8"></script>
+  <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?7192fa361f5cabb11d8a22de41c1ba8f";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+  
+  <title>日常技术小结（1）：0615 | xiaoqin’s Blog</title>
+  <meta name="author" content="风花树">
+  
+  <meta name="description" content="Beyond their own">
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-
-
-
-  
-  
-  
-  
+  <meta property="og:title" content="日常技术小结（1）：0615"/>
+  <meta property="og:site_name" content="xiaoqin’s Blog"/>
 
   
-    
-    
+    <meta property="og:image" content="undefined"/>
   
 
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="(一) manager写法总结按照数据的流向编号
-1.继承自网络访问工具类2.分页属性
-12【依据具体情况添加此项】总页数，当前页码索引，总条数
-3.数据存储容器（一般是结构体数组）1关于结构体，是一个独立文件，根据后台返回的字段列表进行编码，用json 进行初始化
-
-4.回调通知12通知控制器数据获取完毕，成功或者失败，一般采用闭包闭包书写比较麻烦，可以预先用typealias实现声明
-5.网络">
-<meta property="og:type" content="article">
-<meta property="og:title" content="日常技术小结（1）：0615">
-<meta property="og:url" content="https://xqqq0.github.io.git/2016/06/15/日常技术小结(1)/index.html">
-<meta property="og:site_name" content="xiaoqin’s Blog">
-<meta property="og:description" content="(一) manager写法总结按照数据的流向编号
-1.继承自网络访问工具类2.分页属性
-12【依据具体情况添加此项】总页数，当前页码索引，总条数
-3.数据存储容器（一般是结构体数组）1关于结构体，是一个独立文件，根据后台返回的字段列表进行编码，用json 进行初始化
-
-4.回调通知12通知控制器数据获取完毕，成功或者失败，一般采用闭包闭包书写比较麻烦，可以预先用typealias实现声明
-5.网络">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_2.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/fenye.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/QQ20160615-0.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/huidiao.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/11.gif">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/error.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/correct.png">
-<meta property="og:image" content="http://o86uiyd40.bkt.clouddn.com/dayin.png">
-<meta property="og:updated_time" content="2016-06-20T04:15:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="日常技术小结（1）：0615">
-<meta name="twitter:description" content="(一) manager写法总结按照数据的流向编号
-1.继承自网络访问工具类2.分页属性
-12【依据具体情况添加此项】总页数，当前页码索引，总条数
-3.数据存储容器（一般是结构体数组）1关于结构体，是一个独立文件，根据后台返回的字段列表进行编码，用json 进行初始化
-
-4.回调通知12通知控制器数据获取完毕，成功或者失败，一般采用闭包闭包书写比较麻烦，可以预先用typealias实现声明
-5.网络">
-<meta name="twitter:image" content="http://o86uiyd40.bkt.clouddn.com/Snip20160606_2.png">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
-
-  <title> 日常技术小结（1）：0615 | xiaoqin’s Blog </title>
+  <link href="/imgs/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="xiaoqin’s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
+<body>
+  <header><div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/imgs/logo.png" alt="xiaoqin’s Blog" title="xiaoqin’s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name">xiaoqin’s Blog</h1>
+				<h2 class="blog-motto">生命不息奋斗不止</h2>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li> <a href="/atom.xml">RSS</a> </li>
+				</ul>
+			</nav>			
+</div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
-
-
-
-
-
-
-
-
-
-
-  
-  
+    <div class="gallery">
+  <div class="photoset">
     
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">xiaoqin’s Blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+      <img src="">
+    
   </div>
-  <p class="site-subtitle">生命不息奋斗不止</p>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
 </div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+  <div class="post-content">
+    <header class="article-info clearfix">
+  <h1 itemprop="name">
+	日常技术小结（1）：0615
+  </h1>
+  <p class="article-author">By
     
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
+      <a href="https://xqqq0.github.io.git" title="风花树">风花树</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-06-15T06:30:17.000Z" itemprop="datePublished">2016-06-15</time>
+    Update date:<time datetime="2016-06-20T04:15:30.000Z" itemprop="dateModified">2016-06-20</time>
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                日常技术小结（1）：0615
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-15T14:30:17+08:00" content="2016-06-15">
-              2016-06-15
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+  </p>
+</header>
+    <div class="entry">
+		
         <h2 id="一-manager写法总结"><a href="#一-manager写法总结" class="headerlink" title="(一) manager写法总结"></a>(一) manager写法总结</h2><h5 id="按照数据的流向编号"><a href="#按照数据的流向编号" class="headerlink" title="按照数据的流向编号"></a>按照数据的流向编号</h5><p><img src="http://o86uiyd40.bkt.clouddn.com/Snip20160606_2.png" alt=""></p>
 <h4 id="1-继承自网络访问工具类"><a href="#1-继承自网络访问工具类" class="headerlink" title="1.继承自网络访问工具类"></a>1.继承自网络访问工具类</h4><h4 id="2-分页属性"><a href="#2-分页属性" class="headerlink" title="2.分页属性"></a>2.分页属性</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/fenye.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">【依据具体情况添加此项】</span><br><span class="line">总页数，当前页码索引，总条数</span><br></pre></td></tr></table></figure>
@@ -311,289 +108,196 @@
 <h5 id="分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在"><a href="#分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在" class="headerlink" title="分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在"></a>分析：代码中的<code>vc</code>属于一个临时变量，在方法执行完以后就销毁，但是由于<code>addSubview</code>方法对<code>tableView</code>持有，所以并未释放掉，但<code>vc</code>已经销毁，数据不存在</h5><h5 id="解决方案：其实问题找到以后，解决方法就好说了，无非就是对vc进行强引用，有两种解决方法"><a href="#解决方案：其实问题找到以后，解决方法就好说了，无非就是对vc进行强引用，有两种解决方法" class="headerlink" title="解决方案：其实问题找到以后，解决方法就好说了，无非就是对vc进行强引用，有两种解决方法"></a>解决方案：其实问题找到以后，解决方法就好说了，无非就是对<code>vc</code>进行强引用，有两种解决方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">创建一个成员变量对vc 进行强引用，适用于单个控制</span><br><span class="line">对于当前场景，多个控制器，可以采用addChildController的方式</span><br></pre></td></tr></table></figure>
 <h2 id="三-关于UITableViewController-的tableView-与-UIViewController-的view"><a href="#三-关于UITableViewController-的tableView-与-UIViewController-的view" class="headerlink" title="(三)关于UITableViewController 的tableView 与 UIViewController 的view"></a>(三)关于UITableViewController 的tableView 与 UIViewController 的view</h2><h5 id="在UITableViewController有一个主要的UIView，用于记录控制器内子控件，或者所有子控件的容器，但是在打印UITableViewControllerview-和-tableView-发现二者内存地址一致，即在UITableViewController中tableView即相当于UITableViewController的view的作用，在添加子控件addSubview的时候，既可以用view也可以用tableView"><a href="#在UITableViewController有一个主要的UIView，用于记录控制器内子控件，或者所有子控件的容器，但是在打印UITableViewControllerview-和-tableView-发现二者内存地址一致，即在UITableViewController中tableView即相当于UITableViewController的view的作用，在添加子控件addSubview的时候，既可以用view也可以用tableView" class="headerlink" title="在UITableViewController有一个主要的UIView，用于记录控制器内子控件，或者所有子控件的容器，但是在打印UITableViewControllerview 和 tableView 发现二者内存地址一致，即在UITableViewController中tableView即相当于UITableViewController的view的作用，在添加子控件addSubview的时候，既可以用view也可以用tableView"></a>在<code>UITableViewController</code>有一个主要的<code>UIView</code>，用于记录控制器内子控件，或者所有子控件的容器，但是在打印<code>UITableViewController</code>view 和 tableView 发现二者内存地址一致，即在<code>UITableViewController</code>中tableView即相当于<code>UITableViewController</code>的<code>view</code>的作用，在添加子控件addSubview的时候，既可以用<code>view</code>也可以用<code>tableView</code></h5><p><img src="http://o86uiyd40.bkt.clouddn.com/dayin.png" alt=""></p>
 
-      
     </div>
-
-    <div>
-      
+    <footer>
         
-      
-    </div>
-
-    <div>
-      
         
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/06/06/初识swift项目的mcvm结构/" rel="next" title="初识Swift项目的MCVM结构">
-                <i class="fa fa-chevron-left"></i> 初识Swift项目的MCVM结构
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/20/关于cell重用的小计/" rel="prev" title="关于cell重用的小计">
-                关于cell重用的小计 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
+		<div class="bdsharebuttonbox">
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+window._bd_share_config=
+{
+	"common":{
+		"bdSnsKey":{},
+		"bdText":"",
+		"bdMini":"2",
+		"bdMiniList":false,
+		"bdPic":"",
+		"bdStyle":"0",
+		"bdSize":"24"
+	},
+	"share":{},
+	"image":{
+		"viewList":["qzone","tsina","tqq","renren","weixin","fbook","twi"],
+		"viewText":"分享到：",
+		"viewSize":"24"
+	},
+	"selectShare":{
+		"bdContainerClass":null,
+		"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","fbook","twi"]
+	}
+};
+with(document)0[
+	(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)
+];
+</script>    
+        <div class="clearfix"></div>
     </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
+</article>
 
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
+ <nav id="pagination" >
     
-  </div>
+    <a href="/2016/06/20/关于cell重用的小计/" class="alignleft prev" title="关于cell重用的小计">关于cell重用的小计</a>
+    
+    
+    <a href="/2016/06/06/初识swift项目的mcvm结构/" class="alignright next" title="初识Swift项目的MCVM结构">初识Swift项目的MCVM结构</a>
+    
+    <div class="clearfix"></div>
+</nav>
 
 
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="http://o86uiyd40.bkt.clouddn.com/12.png"
-               alt="风花树" />
-          <p class="site-author-name" itemprop="name">风花树</p>
-          <p class="site-description motion-element" itemprop="description">Beyond their own</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情连接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://github.com/xqqq0" title="github" target="_blank">github</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://sun-fox-cj.github.io" title="chishen’s Blog" target="_blank">chishen’s Blog</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.cocoachina.com" title="cocoachina" target="_blank">cocoachina</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-manager写法总结"><span class="nav-number">1.</span> <span class="nav-text">(一) manager写法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#按照数据的流向编号"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">按照数据的流向编号</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-继承自网络访问工具类"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.继承自网络访问工具类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-分页属性"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.分页属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-数据存储容器（一般是结构体数组）"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.数据存储容器（一般是结构体数组）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-回调通知"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.回调通知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-网络访问方法（依据具体的场景增减函数）"><span class="nav-number">1.0.5.</span> <span class="nav-text">5.网络访问方法（依据具体的场景增减函数）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-控制器之间引用"><span class="nav-number">2.</span> <span class="nav-text">(二) 控制器之间引用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在开发中经常会用到一个控制器去引用另外一个控制器的view，如下图，有个UIViewController作为一个大容器，在每次滑动的时候需要加载一个新的UITableViewController。需要注意的点，首先是将UITableViewController的tableView添加UIViewController的view。"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">在开发中经常会用到一个控制器去引用另外一个控制器的view，如下图，有个UIViewController作为一个大容器，在每次滑动的时候需要加载一个新的UITableViewController。需要注意的点，首先是将UITableViewController的tableView添加UIViewController的view。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后来发现数据不显示，只有一个空的tableView，说明UITableViewController已经有了tableView，后来代码进行了修改"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">后来发现数据不显示，只有一个空的tableView，说明UITableViewController已经有了tableView，后来代码进行了修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">分析：代码中的vc属于一个临时变量，在方法执行完以后就销毁，但是由于addSubview方法对tableView持有，所以并未释放掉，但vc已经销毁，数据不存在</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案：其实问题找到以后，解决方法就好说了，无非就是对vc进行强引用，有两种解决方法"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">解决方案：其实问题找到以后，解决方法就好说了，无非就是对vc进行强引用，有两种解决方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-关于UITableViewController-的tableView-与-UIViewController-的view"><span class="nav-number">3.</span> <span class="nav-text">(三)关于UITableViewController 的tableView 与 UIViewController 的view</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在UITableViewController有一个主要的UIView，用于记录控制器内子控件，或者所有子控件的容器，但是在打印UITableViewControllerview-和-tableView-发现二者内存地址一致，即在UITableViewController中tableView即相当于UITableViewController的view的作用，在添加子控件addSubview的时候，既可以用view也可以用tableView"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">在UITableViewController有一个主要的UIView，用于记录控制器内子控件，或者所有子控件的容器，但是在打印UITableViewControllerview 和 tableView 发现二者内存地址一致，即在UITableViewController中tableView即相当于UITableViewController的view的作用，在添加子控件addSubview的时候，既可以用view也可以用tableView</span></a></li></ol></li></ol></li></ol></li></ol></div>
-            
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">风花树</span>
+	
+	<section id="comment">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="2016/06/15/日常技术小结(1)/" data-title="日常技术小结（1）：0615" data-url="https://xqqq0.github.io.git/2016/06/15/日常技术小结(1)/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:""};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+		<!-- 多说公共JS代码 end -->
+	</section>
+	
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:xqqq0.github.io.git">
+  </form>
 </div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
 
   
 
+  
+
+  <iframe width="100%" height="140" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1923610190&verifier=6af5ad6a&colors=fafafa,fafafa,666666,0082cb,ecfbfd&dpc=1"></iframe>
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://opiece.me" title="Chillax's Blog" target="_blank">Chillax</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hi,I&#39;m the designer of this theme. <br/>
+			You can download this theme on my github.</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/1923610190" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/huangjunhui" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com/huangjunhui" target="_blank" title="facebook"></a>
+		
+		
+		
+		<a href="mailto:jhhuang1993@foxmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/huangjunhui/concise" target="_blank" title="Concise">Concise</a> © 2016 
+		
+		<a href="https://xqqq0.github.io.git/about" target="_blank" title="风花树">风花树</a>
+		
+		</p>
+</div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/counter.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
+<div id="totop" style="position:fixed;bottom:100px;right:10px;cursor: pointer;">
+<a title="返回顶部"><img src="/imgs/scrollup.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
-
-
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-  
-
-  
-
-  
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
+
+
