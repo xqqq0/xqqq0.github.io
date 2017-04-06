@@ -84,7 +84,7 @@
 
 
 
-<meta name="description" content="前言在本章中主要介绍新建Django项目，以及项目的配置和数据库设计
+<meta name="description" content="title: Moc–数据库设计前言在本章中主要介绍新建Django项目，以及项目的配置和数据库设计
 创建项目创建项目的两种方式
 命令行创建在前些文章中，讲述过通过命令行去创建Django项目，在此不再赘述
 通过pycharm创建
@@ -93,13 +93,12 @@
 
 
 
-配置Django项目数据库配置
-打开项目根app下">
+配置Django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Moc--数据库设计">
 <meta property="og:url" content="https://xqqq0.github.io.git/2017/04/05/MocWeb/index.html">
 <meta property="og:site_name" content="xiaoqin’s Blog">
-<meta property="og:description" content="前言在本章中主要介绍新建Django项目，以及项目的配置和数据库设计
+<meta property="og:description" content="title: Moc–数据库设计前言在本章中主要介绍新建Django项目，以及项目的配置和数据库设计
 创建项目创建项目的两种方式
 命令行创建在前些文章中，讲述过通过命令行去创建Django项目，在此不再赘述
 通过pycharm创建
@@ -108,16 +107,16 @@
 
 
 
-配置Django项目数据库配置
-打开项目根app下">
+配置Django">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/954728-f5a53035258fb6a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/954728-185a195b0c268cd2.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/954728-3e9650670afdac8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/954728-420b23a2001c2303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-04-05T10:13:46.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/954728-c9854145d28d065c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-06T03:17:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Moc--数据库设计">
-<meta name="twitter:description" content="前言在本章中主要介绍新建Django项目，以及项目的配置和数据库设计
+<meta name="twitter:description" content="title: Moc–数据库设计前言在本章中主要介绍新建Django项目，以及项目的配置和数据库设计
 创建项目创建项目的两种方式
 命令行创建在前些文章中，讲述过通过命令行去创建Django项目，在此不再赘述
 通过pycharm创建
@@ -126,8 +125,7 @@
 
 
 
-配置Django项目数据库配置
-打开项目根app下">
+配置Django">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/954728-f5a53035258fb6a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -306,7 +304,8 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在本章中主要介绍新建Django项目，以及项目的配置和数据库设计</p>
+        <hr>
+<h2 id="title-Moc–数据库设计"><a href="#title-Moc–数据库设计" class="headerlink" title="title: Moc–数据库设计"></a>title: Moc–数据库设计</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在本章中主要介绍新建Django项目，以及项目的配置和数据库设计</p>
 <h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><h3 id="创建项目的两种方式"><a href="#创建项目的两种方式" class="headerlink" title="创建项目的两种方式"></a>创建项目的两种方式</h3><ul>
 <li>命令行创建<br>在<a href="http://www.jianshu.com/p/9fa923e8523d" target="_blank" rel="external">前些文章</a>中，讲述过通过命令行去创建Django项目，在此不再赘述</li>
 <li>通过pycharm创建<ul>
@@ -330,7 +329,13 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/954728-185a195b0c268cd2.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建数据库"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/954728-3e9650670afdac8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="命名并选择字符集"></p>
 <ul>
-<li>数据迁移<br>本项目中我们使用pycharm自带的终端系统进行数据迁移以及其他的终端操作<br><code>Tools -&gt;Run manage.py task</code><br>然后分别执行数据迁移命令：<br><code>makemigrations</code><br><code>migrate</code><br><img src="http://upload-images.jianshu.io/upload_images/954728-420b23a2001c2303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据迁移表"></li>
+<li>数据迁移<br>本项目中我们使用pycharm自带的终端系统进行数据迁移以及其他的终端操作,打开pycharm<br><code>Tools -&gt; Run manage.py task</code><br>然后分别执行数据迁移命令：<br><code>makemigrations</code><br><code>migrate</code><br><img src="http://upload-images.jianshu.io/upload_images/954728-420b23a2001c2303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据迁移表"></li>
+</ul>
+<h1 id="创建app"><a href="#创建app" class="headerlink" title="创建app"></a>创建app</h1><h3 id="创建app-user"><a href="#创建app-user" class="headerlink" title="创建app user"></a>创建app user</h3><ul>
+<li>pycharm 命令行 <code>startapp app的名字</code>，这里我们输入  <code>startapp users</code></li>
+<li>预览系统的auth_user表<br><img src="http://upload-images.jianshu.io/upload_images/954728-c9854145d28d065c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="系统user表结构"><h3 id="自定义user表"><a href="#自定义user表" class="headerlink" title="自定义user表"></a>自定义user表</h3>由于系统自带的auth_user表不能满足需求中user表的功能，所以我们需要自定义user表</li>
+<li>通过继承自AbstractUser来继承系统表的字段<br><code>from django.contrib.auth.models import AbstractUser</code></li>
+<li>创建相应数据库字段</li>
 </ul>
 <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>We will mainly talk about that how can we create the Django project and the design database in this chapter. There are 4 main apps in our project: users,course，organization，operation。The reason why we design like this is that we will discuss later.</p>
 <h1 id="Create-Django-Project"><a href="#Create-Django-Project" class="headerlink" title="Create Django Project"></a>Create Django Project</h1><h3 id="use"><a href="#use" class="headerlink" title="use"></a>use</h3>
@@ -485,7 +490,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建项目"><span class="nav-number">2.</span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建项目的两种方式"><span class="nav-number">2.0.1.</span> <span class="nav-text">创建项目的两种方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Django项目"><span class="nav-number">3.</span> <span class="nav-text">配置Django项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库配置"><span class="nav-number">3.0.1.</span> <span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat-创建数据库"><span class="nav-number">3.0.2.</span> <span class="nav-text">Navicat 创建数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Preface"><span class="nav-number">4.</span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-Django-Project"><span class="nav-number">5.</span> <span class="nav-text">Create Django Project</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#use"><span class="nav-number">5.0.1.</span> <span class="nav-text">use</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title-Moc–数据库设计"><span class="nav-number">1.</span> <span class="nav-text">title: Moc–数据库设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number"></span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建项目"><span class="nav-number"></span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建项目的两种方式"><span class="nav-number">0.1.</span> <span class="nav-text">创建项目的两种方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Django项目"><span class="nav-number"></span> <span class="nav-text">配置Django项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库配置"><span class="nav-number">0.1.</span> <span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat-创建数据库"><span class="nav-number">0.2.</span> <span class="nav-text">Navicat 创建数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建app"><span class="nav-number"></span> <span class="nav-text">创建app</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建app-user"><span class="nav-number">0.1.</span> <span class="nav-text">创建app user</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义user表"><span class="nav-number">0.2.</span> <span class="nav-text">自定义user表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Preface"><span class="nav-number"></span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-Django-Project"><span class="nav-number"></span> <span class="nav-text">Create Django Project</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#use"><span class="nav-number">0.1.</span> <span class="nav-text">use</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

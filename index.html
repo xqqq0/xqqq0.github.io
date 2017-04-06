@@ -277,7 +277,8 @@
       
         
           
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在本章中主要介绍新建Django项目，以及项目的配置和数据库设计</p>
+            <hr>
+<h2 id="title-Moc–数据库设计"><a href="#title-Moc–数据库设计" class="headerlink" title="title: Moc–数据库设计"></a>title: Moc–数据库设计</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在本章中主要介绍新建Django项目，以及项目的配置和数据库设计</p>
 <h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><h3 id="创建项目的两种方式"><a href="#创建项目的两种方式" class="headerlink" title="创建项目的两种方式"></a>创建项目的两种方式</h3><ul>
 <li>命令行创建<br>在<a href="http://www.jianshu.com/p/9fa923e8523d" target="_blank" rel="external">前些文章</a>中，讲述过通过命令行去创建Django项目，在此不再赘述</li>
 <li>通过pycharm创建<ul>
@@ -301,7 +302,13 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/954728-185a195b0c268cd2.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建数据库"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/954728-3e9650670afdac8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="命名并选择字符集"></p>
 <ul>
-<li>数据迁移<br>本项目中我们使用pycharm自带的终端系统进行数据迁移以及其他的终端操作<br><code>Tools -&gt;Run manage.py task</code><br>然后分别执行数据迁移命令：<br><code>makemigrations</code><br><code>migrate</code><br><img src="http://upload-images.jianshu.io/upload_images/954728-420b23a2001c2303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据迁移表"></li>
+<li>数据迁移<br>本项目中我们使用pycharm自带的终端系统进行数据迁移以及其他的终端操作,打开pycharm<br><code>Tools -&gt; Run manage.py task</code><br>然后分别执行数据迁移命令：<br><code>makemigrations</code><br><code>migrate</code><br><img src="http://upload-images.jianshu.io/upload_images/954728-420b23a2001c2303.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据迁移表"></li>
+</ul>
+<h1 id="创建app"><a href="#创建app" class="headerlink" title="创建app"></a>创建app</h1><h3 id="创建app-user"><a href="#创建app-user" class="headerlink" title="创建app user"></a>创建app user</h3><ul>
+<li>pycharm 命令行 <code>startapp app的名字</code>，这里我们输入  <code>startapp users</code></li>
+<li>预览系统的auth_user表<br><img src="http://upload-images.jianshu.io/upload_images/954728-c9854145d28d065c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="系统user表结构"><h3 id="自定义user表"><a href="#自定义user表" class="headerlink" title="自定义user表"></a>自定义user表</h3>由于系统自带的auth_user表不能满足需求中user表的功能，所以我们需要自定义user表</li>
+<li>通过继承自AbstractUser来继承系统表的字段<br><code>from django.contrib.auth.models import AbstractUser</code></li>
+<li>创建相应数据库字段</li>
 </ul>
 <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>We will mainly talk about that how can we create the Django project and the design database in this chapter. There are 4 main apps in our project: users,course，organization，operation。The reason why we design like this is that we will discuss later.</p>
 <h1 id="Create-Django-Project"><a href="#Create-Django-Project" class="headerlink" title="Create Django Project"></a>Create Django Project</h1><h3 id="use"><a href="#use" class="headerlink" title="use"></a>use</h3>
@@ -719,106 +726,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/26/tableView分隔线小计/" itemprop="url">
-                  UITableView 分隔线小记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-26T10:13:47+08:00" content="2016-08-26">
-              2016-08-26
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："><a href="#在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：" class="headerlink" title="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："></a>在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine0.png" alt=""></p>
-<h4 id="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"><a href="#一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。" class="headerlink" title="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"></a>一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine1.png" alt=""></p>
-<h4 id="swift是这样的"><a href="#swift是这样的" class="headerlink" title="swift是这样的"></a>swift是这样的</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine2.png" alt=""></p>
-<h4 id="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"><a href="#还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑" class="headerlink" title="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"></a>还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了<a href="http://sun-fox-cj.github.io" target="_blank" rel="external">@池神</a>的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑</h4><ul>
-<li>layoutMargins两个组件必须都要设置的</li>
-<li>separatorInset 至少其中一个组件要设置，可以两个都设置</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/08/26/HS项目统计小计/" itemprop="url">
                   HS项目中点击事件以及页面事件统计的流程（上）
                 </a>
@@ -875,6 +782,106 @@
 <h4 id="主要是在-HSStatisticsManager-中添加静态方法"><a href="#主要是在-HSStatisticsManager-中添加静态方法" class="headerlink" title="主要是在 HSStatisticsManager 中添加静态方法"></a>主要是在 HSStatisticsManager 中添加静态方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">///  发现页面-品花生(记录停留时间)</span><br><span class="line">static func discoverPSH() &#123;</span><br><span class="line">    shareInstance.addEvent(kPinHuaSheng, statisticInfo: nil)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="参数包裹在HSStatisticsInfo-结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr"><a href="#参数包裹在HSStatisticsInfo-结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr" class="headerlink" title="参数包裹在HSStatisticsInfo 结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr"></a>参数包裹在HSStatisticsInfo 结构体中，需要记录id的，一般赋值给rid，位置position，附加主要是extr</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct HSStatisticsInfo &#123;</span><br><span class="line">    </span><br><span class="line">    var rid: String</span><br><span class="line">    var position: String</span><br><span class="line">    var extra: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>3 .  在具体页面进行调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line">    </span><br><span class="line">    isNeedAccessTokenParam = true</span><br><span class="line">    pageSourceType = HSPageSourceType.PinPeanut</span><br><span class="line">    </span><br><span class="line">    view.addSubview(webView)</span><br><span class="line">    webView.snp_makeConstraints &#123; (make) in</span><br><span class="line">        make.edges.equalTo(view)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let urlRequest = NSURLRequest(URL: self.url!)</span><br><span class="line">    webView.loadRequest(urlRequest)</span><br><span class="line">    </span><br><span class="line">    HSStatisticsManager.discoverPSH()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/26/tableView分隔线小计/" itemprop="url">
+                  UITableView 分隔线小记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-26T10:13:47+08:00" content="2016-08-26">
+              2016-08-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h4 id="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："><a href="#在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：" class="headerlink" title="在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的："></a>在开发中，有些UI设计图对于tableView的分隔线有一些特殊的设计，原生的默认的UITableView分隔线是这样的：</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine0.png" alt=""></p>
+<h4 id="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"><a href="#一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。" class="headerlink" title="一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。"></a>一些常见的修改是将分隔线留出的空隙去掉，目前网上最常见的方式是这样的，或者是自定义组件。</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine1.png" alt=""></p>
+<h4 id="swift是这样的"><a href="#swift是这样的" class="headerlink" title="swift是这样的"></a>swift是这样的</h4><p><img src="http://o86uiyd40.bkt.clouddn.com/sepLine2.png" alt=""></p>
+<h4 id="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"><a href="#还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了-池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑" class="headerlink" title="还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了@池神的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑"></a>还有就是自定义组件，这种方式不再赘述，但是网上这种常见的设置方式，貌似在ios9（也许在之前也不好使了）不好用了<a href="http://sun-fox-cj.github.io" target="_blank" rel="external">@池神</a>的探索发现，不但要要对tableView进行设置，还要在cell进行同样的设置，且有一下组合顾虑</h4><ul>
+<li>layoutMargins两个组件必须都要设置的</li>
+<li>separatorInset 至少其中一个组件要设置，可以两个都设置</li>
+</ul>
 
           
         
